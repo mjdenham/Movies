@@ -47,7 +47,7 @@ private fun TopRatedMovie(it: TopRatedSummaryDto.MovieDto, modifier: Modifier) {
             model = it.smallPosterPath,
             contentDescription = "Movie poster",
             contentScale = ContentScale.Crop,
-            modifier = Modifier
+            modifier = modifier
                 .padding(15.dp)
                 .size(80.dp)
                 .clip(CircleShape)
