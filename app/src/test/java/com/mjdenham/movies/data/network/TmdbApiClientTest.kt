@@ -14,8 +14,8 @@ class TmdbApiClientTest {
         runBlocking {
             val movies = tmdbApiClient.getTopRated(2)
             assertEquals(2, movies.page)
-            assertNotNull(movies.results[0].name)
-            assert(movies.results.size > 10)
+            assertNotNull(movies.movies[0].name)
+            assert(movies.movies.size > 10)
         }
     }
 }
