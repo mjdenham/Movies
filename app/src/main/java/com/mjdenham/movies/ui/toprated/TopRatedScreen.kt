@@ -35,7 +35,7 @@ fun TopRatedScreen(modifier: Modifier = Modifier, viewModel: TopRatedViewModel =
 private fun TopRated(movies: List<TopRatedSummaryDto.MovieDto>, modifier: Modifier) {
     LazyColumn(modifier = modifier) {
         items(movies) {
-            TopRatedMovie(it, modifier.padding(0.dp))
+            TopRatedMovie(it, modifier)
         }
     }
 }
