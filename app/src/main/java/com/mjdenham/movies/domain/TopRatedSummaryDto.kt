@@ -5,5 +5,10 @@ data class TopRatedSummaryDto(
     val totalPages: Long,
     val movies: List<MovieDto>
 ) {
-    data class MovieDto(val id: Long, val name: String, val smallPosterPath: String)
+    data class MovieDto(
+        val id: Long,
+        val name: String,
+        val voteAverage: Int,
+        val smallPosterPath: String
+    )
 }
