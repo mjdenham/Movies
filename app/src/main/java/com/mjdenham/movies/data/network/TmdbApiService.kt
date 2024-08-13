@@ -6,5 +6,5 @@ import retrofit2.http.Query
 
 interface TmdbApiService {
     @GET("top_rated")
-    suspend fun getMovies(@Query("page") page: Int, @Header("Authorization")apiToken: String): Movie
+    suspend fun getTopRated(@Query("page") page: Int, @Header("Authorization")apiToken: String): TopRatedResponse
 }
