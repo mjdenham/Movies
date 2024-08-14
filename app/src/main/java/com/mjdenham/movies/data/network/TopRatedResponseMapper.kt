@@ -21,7 +21,9 @@ class TopRatedResponseMapper {
 
     private fun voteAveragePercent(voteAverage: Double) = (10.0 * voteAverage).roundToInt()
 
-    private fun smallPosterPathFrom(posterPath: String): String = SMALL_POSTER_PREFIX + posterPath
+    private fun smallPosterPathFrom(posterPath: String?): String? = posterPath?.let {
+        SMALL_POSTER_PREFIX + posterPath
+    }
 
     companion object {
         private const val SMALL_POSTER_PREFIX = "https://image.tmdb.org/t/p/w92/"

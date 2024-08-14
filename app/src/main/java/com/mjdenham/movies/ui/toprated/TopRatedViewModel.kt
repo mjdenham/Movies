@@ -2,29 +2,26 @@ package com.mjdenham.movies.ui.toprated
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mjdenham.movies.domain.MoviesUseCase
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.PagingSource
+import androidx.paging.cachedIn
 import com.mjdenham.movies.domain.TopRatedSummaryDto
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.Flow
 
-class TopRatedViewModel(val moviesUseCase: MoviesUseCase = MoviesUseCase(), val dispatcher: CoroutineDispatcher = Dispatchers.IO): ViewModel() {
+class TopRatedViewModel(val moviesPagingSource: PagingSource<Int, TopRatedSummaryDto.MovieDto> = MoviesPagingSource()): ViewModel() {
 
-    private val _topRatedState = MutableStateFlow<List<TopRatedSummaryDto.MovieDto>>(emptyList())
-    val topRatedState: StateFlow<List<TopRatedSummaryDto.MovieDto>> = _topRatedState.asStateFlow()
+    private val pagingDataFlow = getMoviesPager().cachedIn(viewModelScope)
 
-    init {
-        loadTopratedMovies()
-    }
+    fun getPagedMovies(): Flow<PagingData<TopRatedSummaryDto.MovieDto>> = pagingDataFlow
 
-    fun loadTopratedMovies() {
-        viewModelScope.launch(dispatcher) {
-            val topRatedMovies = moviesUseCase.getTopRatedMovies(1)
-            _topRatedState.value = topRatedMovies.movies
+    private fun getMoviesPager() = Pager(
+        config = PagingConfig(
+            pageSize = 20,
+        ),
+        pagingSourceFactory = {
+            moviesPagingSource
         }
-    }
-
+    ).flow
 }

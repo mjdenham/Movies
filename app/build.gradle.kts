@@ -70,6 +70,8 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.lifecycle)
     implementation(libs.coil.compose)
+    implementation(libs.androidx.paging.runtime.ktx)
+    implementation(libs.androidx.paging.compose)
 
     implementation(libs.retrofit)
     implementation(libs.kotlinx.serialization.json)

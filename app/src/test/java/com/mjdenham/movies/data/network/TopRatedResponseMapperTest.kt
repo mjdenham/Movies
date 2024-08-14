@@ -33,6 +33,6 @@ class TopRatedResponseMapperTest {
         assertEquals(1, dto.movies.size)
         assertEquals("Name", dto.movies[0].name)
         assertEquals(89, dto.movies[0].voteAveragePc)
-        assertTrue(dto.movies[0].smallPosterPath.endsWith("posterPath.jpg"))
+        assertTrue(dto.movies[0].smallPosterPath!!.endsWith("posterPath.jpg"))
     }
 }

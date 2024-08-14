@@ -5,10 +5,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class TopRatedResponse(
-    val page: Long,
+    val page: Int,
     val results: List<MovieResult>,
     @SerialName("total_pages")
-    val totalPages: Long,
+    val totalPages: Int,
     @SerialName("total_results")
     val totalResults: Long,
 ) {
@@ -17,7 +17,7 @@ data class TopRatedResponse(
     data class MovieResult(
         val adult: Boolean,
         @SerialName("backdrop_path")
-        val backdropPath: String,
+        val backdropPath: String?,
         @SerialName("genre_ids")
         val genreIds: List<Long>,
         val id: Long,
@@ -30,9 +30,9 @@ data class TopRatedResponse(
         val overview: String,
         val popularity: Double,
         @SerialName("poster_path")
-        val posterPath: String,
+        val posterPath: String?,
         @SerialName("first_air_date")
-        val firstAirDate: String,
+        val firstAirDate: String?,
         val name: String,
         @SerialName("vote_average")
         val voteAverage: Double,
