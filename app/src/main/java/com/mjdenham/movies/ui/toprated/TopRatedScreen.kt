@@ -21,16 +21,16 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import com.mjdenham.movies.R
 import com.mjdenham.movies.domain.TopRatedSummaryDto
 import com.mjdenham.movies.ui.theme.MoviesTheme
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun TopRatedScreen(modifier: Modifier = Modifier, viewModel: TopRatedViewModel = viewModel()) {
+fun TopRatedScreen(modifier: Modifier = Modifier, viewModel: TopRatedViewModel = koinViewModel()) {
     val lazyPagingMovies = viewModel.getPagedMovies().collectAsLazyPagingItems()
 
     LazyColumn {

@@ -1,7 +1,5 @@
 package com.mjdenham.movies.domain
 
-import com.mjdenham.movies.data.network.TmdbApiClient
-
-class MoviesUseCase(val moviesApi: MoviesApi = TmdbApiClient()) {
+class MoviesUseCase(private val moviesApi: MoviesApi) {
     suspend fun getTopRatedMovies(page: Int): TopRatedSummaryDto = moviesApi.getTopRated(page)
 }

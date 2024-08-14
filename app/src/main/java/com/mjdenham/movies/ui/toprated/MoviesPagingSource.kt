@@ -7,7 +7,7 @@ import com.mjdenham.movies.domain.MoviesUseCase
 import com.mjdenham.movies.domain.TopRatedSummaryDto
 
 class MoviesPagingSource(
-    val moviesUseCase: MoviesUseCase = MoviesUseCase(),
+    private val moviesUseCase: MoviesUseCase
 ): PagingSource<Int, TopRatedSummaryDto.MovieDto>() {
 
     override fun getRefreshKey(state: PagingState<Int, TopRatedSummaryDto.MovieDto>): Int? {
