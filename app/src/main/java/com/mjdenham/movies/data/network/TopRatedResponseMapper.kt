@@ -5,10 +5,21 @@ import kotlin.math.roundToInt
 
 class TopRatedResponseMapper {
     fun mapToTopRatedDto(topRatedResponse: TopRatedResponse): TopRatedSummaryDto =
-        TopRatedSummaryDto(topRatedResponse.page, topRatedResponse.totalPages, topRatedResponse.results.map(::mapToMovieDto))
+        TopRatedSummaryDto(
+            topRatedResponse.page,
+            topRatedResponse.totalPages,
+            topRatedResponse.results.map(::mapToMovieDto)
+        )
 
     private fun mapToMovieDto(movieResult: TopRatedResponse.MovieResult): TopRatedSummaryDto.MovieDto =
-        TopRatedSummaryDto.MovieDto(movieResult.id, movieResult.name, movieResult.voteAverage.roundToInt(), smallPosterPathFrom(movieResult.posterPath))
+        TopRatedSummaryDto.MovieDto(
+            movieResult.id,
+            movieResult.name,
+            voteAveragePercent(movieResult.voteAverage),
+            smallPosterPathFrom(movieResult.posterPath)
+        )
+
+    private fun voteAveragePercent(voteAverage: Double) = (10.0 * voteAverage).roundToInt()
 
     private fun smallPosterPathFrom(posterPath: String): String = SMALL_POSTER_PREFIX + posterPath
 

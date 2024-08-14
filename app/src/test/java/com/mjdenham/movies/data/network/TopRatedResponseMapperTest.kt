@@ -21,7 +21,7 @@ class TopRatedResponseMapperTest {
         posterPath = "posterPath.jpg",
         firstAirDate = "",
         name = "Name",
-        voteAverage = 0.1,
+        voteAverage = 8.91,
         voteCount = 2
     )
 
@@ -32,6 +32,7 @@ class TopRatedResponseMapperTest {
         assertEquals(5, dto.page)
         assertEquals(1, dto.movies.size)
         assertEquals("Name", dto.movies[0].name)
+        assertEquals(89, dto.movies[0].voteAveragePc)
         assertTrue(dto.movies[0].smallPosterPath.endsWith("posterPath.jpg"))
     }
 }

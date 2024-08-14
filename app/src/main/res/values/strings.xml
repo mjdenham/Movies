@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Top Movies</string>
+    <string name="vote_percent">Score %1$d%%</string>
 </resources>

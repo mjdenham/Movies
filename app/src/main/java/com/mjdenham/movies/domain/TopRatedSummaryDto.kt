@@ -8,7 +8,7 @@ data class TopRatedSummaryDto(
     data class MovieDto(
         val id: Long,
         val name: String,
-        val voteAverage: Int,
+        val voteAveragePc: Int,
         val smallPosterPath: String
     )
 }

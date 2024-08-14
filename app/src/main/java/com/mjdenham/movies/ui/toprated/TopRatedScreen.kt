@@ -18,10 +18,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
+import com.mjdenham.movies.R
 import com.mjdenham.movies.domain.TopRatedSummaryDto
 import com.mjdenham.movies.ui.theme.MoviesTheme
 
@@ -54,7 +56,7 @@ private fun TopRatedMovie(it: TopRatedSummaryDto.MovieDto, modifier: Modifier) {
         )
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Text(text = it.name, style = MaterialTheme.typography.titleMedium)
-            Text(text = "Score: ${it.voteAverage}", style = MaterialTheme.typography.bodyMedium)
+            Text(text = stringResource(id = R.string.vote_percent, it.voteAveragePc), style = MaterialTheme.typography.bodyMedium)
         }
     }
     HorizontalDivider()
