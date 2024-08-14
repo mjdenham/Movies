@@ -6,14 +6,14 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.mjdenham.movies.domain.TopRatedSummaryDto
+import com.mjdenham.movies.domain.MovieDto
 import kotlinx.coroutines.flow.Flow
 
 class TopRatedViewModel(val moviesPagingSource: MoviesPagingSource): ViewModel() {
 
     private val pagingDataFlow = getMoviesPager().cachedIn(viewModelScope)
 
-    fun getPagedMovies(): Flow<PagingData<TopRatedSummaryDto.MovieDto>> = pagingDataFlow
+    fun getPagedMovies(): Flow<PagingData<MovieDto>> = pagingDataFlow
 
     private fun getMoviesPager() = Pager(
         config = PagingConfig(

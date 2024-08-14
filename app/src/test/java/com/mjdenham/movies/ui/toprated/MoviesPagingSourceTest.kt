@@ -1,6 +1,7 @@
 package com.mjdenham.movies.ui.toprated
 
 import androidx.paging.PagingSource
+import com.mjdenham.movies.domain.MovieDto
 import com.mjdenham.movies.domain.MoviesApi
 import com.mjdenham.movies.domain.MoviesUseCase
 import com.mjdenham.movies.domain.TopRatedSummaryDto
@@ -11,7 +12,7 @@ import org.junit.Test
 
 class MoviesPagingSourceTest {
 
-    private val testMovie = TopRatedSummaryDto.MovieDto(1, "Spiderman", 9, "posterPath")
+    private val testMovie = MovieDto(1, "Spiderman", 9, "posterPath")
 
     private val moviesApiStub = object : MoviesApi {
         override suspend fun getTopRated(page: Int): TopRatedSummaryDto {
@@ -44,8 +45,8 @@ class MoviesPagingSourceTest {
 
     @Test
     fun refreshShouldLoadData() = runTest {
-        val loadResult: PagingSource.LoadResult<Int, TopRatedSummaryDto.MovieDto> = pagingSource.load(loadParamsRefresh)
-        val pageResult = loadResult as PagingSource.LoadResult.Page<Int, TopRatedSummaryDto.MovieDto>
+        val loadResult: PagingSource.LoadResult<Int, MovieDto> = pagingSource.load(loadParamsRefresh)
+        val pageResult = loadResult as PagingSource.LoadResult.Page<Int, MovieDto>
         assertEquals(1, pageResult.nextKey)
         assertEquals(1, pageResult.data.size)
         assertEquals(testMovie, pageResult.data[0])
@@ -53,8 +54,8 @@ class MoviesPagingSourceTest {
 
     @Test
     fun appendShouldStopAtEnd() = runTest {
-        val loadResult: PagingSource.LoadResult<Int, TopRatedSummaryDto.MovieDto> = pagingSource.load(loadParamsAppend)
-        val pageResult = loadResult as PagingSource.LoadResult.Page<Int, TopRatedSummaryDto.MovieDto>
+        val loadResult: PagingSource.LoadResult<Int, MovieDto> = pagingSource.load(loadParamsAppend)
+        val pageResult = loadResult as PagingSource.LoadResult.Page<Int, MovieDto>
         assertEquals(null, pageResult.nextKey)
         assertEquals(1, pageResult.data.size)
         assertEquals(testMovie, pageResult.data[0])

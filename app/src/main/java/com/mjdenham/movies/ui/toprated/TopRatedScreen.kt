@@ -1,5 +1,6 @@
 package com.mjdenham.movies.ui.toprated
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,12 +26,12 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import com.mjdenham.movies.R
-import com.mjdenham.movies.domain.TopRatedSummaryDto
+import com.mjdenham.movies.domain.MovieDto
 import com.mjdenham.movies.ui.theme.MoviesTheme
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun TopRatedScreen(modifier: Modifier = Modifier, viewModel: TopRatedViewModel = koinViewModel()) {
+fun TopRatedScreen(onMovieSelected: (movie: MovieDto) -> Unit, modifier: Modifier = Modifier, viewModel: TopRatedViewModel = koinViewModel()) {
     val lazyPagingMovies = viewModel.getPagedMovies().collectAsLazyPagingItems()
 
     LazyColumn {
@@ -47,7 +48,12 @@ fun TopRatedScreen(modifier: Modifier = Modifier, viewModel: TopRatedViewModel =
 
         items(count = lazyPagingMovies.itemCount) { index ->
             lazyPagingMovies[index]?.let { movieItem ->
-                TopRatedMovie(it = movieItem, modifier = modifier)
+                TopRatedMovie(
+                    movie = movieItem,
+                    modifier = modifier.clickable {
+                        onMovieSelected(movieItem)
+                    }
+                )
             }
         }
 
@@ -64,10 +70,13 @@ fun TopRatedScreen(modifier: Modifier = Modifier, viewModel: TopRatedViewModel =
 }
 
 @Composable
-private fun TopRatedMovie(it: TopRatedSummaryDto.MovieDto, modifier: Modifier) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
+private fun TopRatedMovie(movie: MovieDto, modifier: Modifier) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier.fillMaxWidth()
+    ) {
         AsyncImage(
-            model = it.smallPosterPath,
+            model = movie.smallPosterPath,
             contentDescription = "Movie poster",
             contentScale = ContentScale.Crop,
             modifier = modifier
@@ -76,8 +85,8 @@ private fun TopRatedMovie(it: TopRatedSummaryDto.MovieDto, modifier: Modifier) {
                 .clip(CircleShape)
         )
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            Text(text = it.name, style = MaterialTheme.typography.titleMedium)
-            Text(text = stringResource(id = R.string.vote_percent, it.voteAveragePc), style = MaterialTheme.typography.bodyMedium)
+            Text(text = movie.name, style = MaterialTheme.typography.titleMedium)
+            Text(text = stringResource(id = R.string.vote_percent, movie.voteAveragePc), style = MaterialTheme.typography.bodyMedium)
         }
     }
     HorizontalDivider()
@@ -87,7 +96,7 @@ private fun TopRatedMovie(it: TopRatedSummaryDto.MovieDto, modifier: Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun TopRatedPreview() {
-    val testMovie = TopRatedSummaryDto.MovieDto(
+    val testMovie = MovieDto(
         1,
         "The Hulk",
         8,
@@ -95,6 +104,6 @@ fun TopRatedPreview() {
     )
 
     MoviesTheme {
-        TopRatedMovie(it = testMovie, modifier = Modifier)
+        TopRatedMovie(movie = testMovie, modifier = Modifier)
     }
 }

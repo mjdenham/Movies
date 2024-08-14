@@ -18,15 +18,22 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
+import com.mjdenham.movies.domain.MovieDto
+import com.mjdenham.movies.ui.CustomNavType
 import com.mjdenham.movies.ui.theme.MoviesTheme
 import com.mjdenham.movies.ui.toprated.TopRatedScreen
 import kotlinx.serialization.Serializable
+import kotlin.reflect.typeOf
 
 /**
  * Values that represent the screens in the app
  */
 @Serializable
-object TopRatedNav
+object TopRatedRoute
+
+@Serializable
+data class SimilarMoviesRoute(val movie: MovieDto)
 
 class MainActivity : ComponentActivity() {
 
@@ -43,13 +50,21 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize()) { innerPadding ->
                     NavHost(
                         navController = navController,
-                        startDestination = TopRatedNav,
+                        startDestination = TopRatedRoute,
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(innerPadding)
                     ) {
-                        composable<TopRatedNav> {
-                            TopRatedScreen()
+                        composable<TopRatedRoute> {
+                            TopRatedScreen({ selectedMovie ->
+                                navController.navigate(SimilarMoviesRoute(selectedMovie))
+                            })
+                        }
+                        composable<SimilarMoviesRoute>(
+                            typeMap = mapOf(typeOf<MovieDto>() to CustomNavType.movieDtoType)
+                        ) { backStackEntry ->
+                            val similarMoviesRoute: SimilarMoviesRoute = backStackEntry.toRoute()
+                            Text(text = similarMoviesRoute.movie.name)
                         }
                     }
                 }

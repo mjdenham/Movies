@@ -3,21 +3,22 @@ package com.mjdenham.movies.ui.toprated
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.mjdenham.movies.domain.MovieDto
 import com.mjdenham.movies.domain.MoviesUseCase
 import com.mjdenham.movies.domain.TopRatedSummaryDto
 
 class MoviesPagingSource(
     private val moviesUseCase: MoviesUseCase
-): PagingSource<Int, TopRatedSummaryDto.MovieDto>() {
+): PagingSource<Int, MovieDto>() {
 
-    override fun getRefreshKey(state: PagingState<Int, TopRatedSummaryDto.MovieDto>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, MovieDto>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
         }
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, TopRatedSummaryDto.MovieDto> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieDto> {
         return try {
             val page = params.key ?: 1
             val response = moviesUseCase.getTopRatedMovies(page)

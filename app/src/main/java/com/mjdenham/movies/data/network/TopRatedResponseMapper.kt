@@ -1,5 +1,6 @@
 package com.mjdenham.movies.data.network
 
+import com.mjdenham.movies.domain.MovieDto
 import com.mjdenham.movies.domain.TopRatedSummaryDto
 import kotlin.math.roundToInt
 
@@ -11,8 +12,8 @@ class TopRatedResponseMapper {
             topRatedResponse.results.map(::mapToMovieDto)
         )
 
-    private fun mapToMovieDto(movieResult: TopRatedResponse.MovieResult): TopRatedSummaryDto.MovieDto =
-        TopRatedSummaryDto.MovieDto(
+    private fun mapToMovieDto(movieResult: TopRatedResponse.MovieResult): MovieDto =
+        MovieDto(
             movieResult.id,
             movieResult.name,
             voteAveragePercent(movieResult.voteAverage),
