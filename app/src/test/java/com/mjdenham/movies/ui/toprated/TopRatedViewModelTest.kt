@@ -1,6 +1,6 @@
 package com.mjdenham.movies.ui.toprated
 
-import com.mjdenham.movies.domain.Movies
+import com.mjdenham.movies.domain.MoviesUseCase
 import com.mjdenham.movies.domain.MoviesApi
 import com.mjdenham.movies.domain.TopRatedSummaryDto
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -26,7 +26,7 @@ class TopRatedViewModelTest {
 
     @Test
     fun shouldLoadMoviesOnInitialisation() = runBlocking {
-        val viewModel = TopRatedViewModel(Movies(moviesApiStub), UnconfinedTestDispatcher())
+        val viewModel = TopRatedViewModel(MoviesUseCase(moviesApiStub), UnconfinedTestDispatcher())
         val movieDtos = viewModel.topRatedState.value
         assertEquals(testMovie.name, movieDtos[0].name)
     }
