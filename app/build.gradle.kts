@@ -9,7 +9,7 @@ plugins {
 
 android {
     namespace = "com.mjdenham.movies"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.mjdenham.movies"
@@ -72,6 +72,8 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.androidx.paging.runtime.ktx)
     implementation(libs.androidx.paging.compose)
+    implementation(libs.androidx.lifecycle)
+    implementation(libs.navigation.compose)
 
     implementation(libs.retrofit)
     implementation(libs.kotlinx.serialization.json)
@@ -81,6 +83,7 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
+    implementation(libs.navigation.compose)
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
