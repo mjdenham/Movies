@@ -5,7 +5,6 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.mjdenham.movies.domain.MovieDto
 import com.mjdenham.movies.domain.MoviesUseCase
-import com.mjdenham.movies.domain.TopRatedSummaryDto
 
 class MoviesPagingSource(
     private val moviesUseCase: MoviesUseCase

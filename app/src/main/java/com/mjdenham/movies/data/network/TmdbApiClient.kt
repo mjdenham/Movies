@@ -12,9 +12,9 @@ class TmdbApiClient: MoviesApi {
         service.getTopRated(page, TMDB_API_TOKEN)
     )
 
-    suspend fun getSimilar(movieId: Int) = //responseMapper.mapToSimilarDto(
+    suspend fun getSimilar(movieId: Int) = responseMapper.mapToSimilarDto(
         service.getSimilar(movieId, TMDB_API_TOKEN)
-    //)
+    )
 
     private val retrofit: Retrofit = Retrofit.Builder()
         .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
@@ -24,7 +24,7 @@ class TmdbApiClient: MoviesApi {
     private val service: TmdbApiService = retrofit.create(TmdbApiService::class.java)
 
     companion object {
-        private val responseMapper = TopRatedResponseMapper()
+        private val responseMapper = ResponseMapper()
         private const val BASE_URL = "https://api.themoviedb.org/3/tv/"
         private const val TMDB_API_TOKEN = "Bearer "+BuildConfig.TMDB_API_TOKEN
     }

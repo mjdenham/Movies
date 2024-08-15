@@ -23,9 +23,10 @@ class TmdbApiClientTest {
     fun similarApiCallShouldReturnValidResults() {
         runBlocking {
             val similar = tmdbApiClient.getSimilar(1396)
-            assertEquals(1, similar.page)
-            assert(similar.results.size > 3)
-            assertNotNull(similar.results[0].name)
+            val movies = similar.movies
+            assert(movies.size > 10)
+            assertNotNull(movies[0].name)
+            assertNotNull(movies[0].overview)
         }
     }
 }

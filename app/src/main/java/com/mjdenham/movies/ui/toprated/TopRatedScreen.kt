@@ -99,8 +99,10 @@ fun TopRatedPreview() {
     val testMovie = MovieDto(
         1,
         "The Hulk",
+        "Brief overview of the film",
         8,
-        "https://image.tmdb.org/t/p/w92/gpkM8VeiYyQuEg9qkAoNplktwe4.jpg"
+        "https://image.tmdb.org/t/p/w92/gpkM8VeiYyQuEg9qkAoNplktwe4.jpg",
+        "https://image.tmdb.org/t/p/original/gpkM8VeiYyQuEg9qkAoNplktwe4.jpg",
     )
 
     MoviesTheme {

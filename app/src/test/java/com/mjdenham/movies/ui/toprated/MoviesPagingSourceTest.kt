@@ -4,7 +4,7 @@ import androidx.paging.PagingSource
 import com.mjdenham.movies.domain.MovieDto
 import com.mjdenham.movies.domain.MoviesApi
 import com.mjdenham.movies.domain.MoviesUseCase
-import com.mjdenham.movies.domain.TopRatedSummaryDto
+import com.mjdenham.movies.domain.TopRatedMoviesDto
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -12,11 +12,11 @@ import org.junit.Test
 
 class MoviesPagingSourceTest {
 
-    private val testMovie = MovieDto(1, "Spiderman", 9, "posterPath")
+    private val testMovie = MovieDto(1, "Spiderman", "Brief overview of the movie", 9, "smallPosterPath", "posterPath")
 
     private val moviesApiStub = object : MoviesApi {
-        override suspend fun getTopRated(page: Int): TopRatedSummaryDto {
-            return TopRatedSummaryDto(
+        override suspend fun getTopRated(page: Int): TopRatedMoviesDto {
+            return TopRatedMoviesDto(
                 1,
                 1,
                 listOf(testMovie)

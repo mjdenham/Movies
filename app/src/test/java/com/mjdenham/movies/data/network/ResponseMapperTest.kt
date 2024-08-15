@@ -4,9 +4,9 @@ import org.junit.Assert.*
 
 import org.junit.Test
 
-class TopRatedResponseMapperTest {
+class ResponseMapperTest {
 
-    private val mapper = TopRatedResponseMapper()
+    private val mapper = ResponseMapper()
 
     private val TEST_MOVIE = MovieResultItem(
         adult = false,
@@ -34,5 +34,16 @@ class TopRatedResponseMapperTest {
         assertEquals("Name", dto.movies[0].name)
         assertEquals(89, dto.movies[0].voteAveragePc)
         assertTrue(dto.movies[0].smallPosterPath!!.endsWith("posterPath.jpg"))
+    }
+
+    @Test
+    fun mappingToSimilarDtoShouldBeValid() {
+        val response = SimilarResponse(5, listOf(TEST_MOVIE), 10, 1)
+        val dto = mapper.mapToSimilarDto(response)
+        assertEquals(1, dto.movies.size)
+        assertEquals("Name", dto.movies[0].name)
+        assertEquals("Overview of movie", dto.movies[0].overview)
+        assertEquals(89, dto.movies[0].voteAveragePc)
+        assertTrue(dto.movies[0].posterPath!!.endsWith("posterPath.jpg"))
     }
 }
