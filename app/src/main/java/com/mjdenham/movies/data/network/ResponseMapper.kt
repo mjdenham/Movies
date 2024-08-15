@@ -25,7 +25,7 @@ class ResponseMapper {
             movieResult.overview,
             voteAveragePercent(movieResult.voteAverage),
             smallPosterPathFrom(movieResult.posterPath),
-            posterPathFrom(movieResult.posterPath)
+            largePosterPathFrom(movieResult.posterPath)
         )
 
     private fun voteAveragePercent(voteAverage: Double) = (10.0 * voteAverage).roundToInt()
@@ -34,12 +34,12 @@ class ResponseMapper {
         SMALL_POSTER_PREFIX + posterPath
     }
 
-    private fun posterPathFrom(posterPath: String?): String? = posterPath?.let {
-        POSTER_PREFIX + posterPath
+    private fun largePosterPathFrom(posterPath: String?): String? = posterPath?.let {
+        LARGE_POSTER_PREFIX + posterPath
     }
 
     companion object {
         private const val SMALL_POSTER_PREFIX = "https://image.tmdb.org/t/p/w92/"
-        private const val POSTER_PREFIX = "https://image.tmdb.org/t/p/original/"
+        private const val LARGE_POSTER_PREFIX = "https://image.tmdb.org/t/p/w780/"
     }
 }

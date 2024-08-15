@@ -44,6 +44,6 @@ class ResponseMapperTest {
         assertEquals("Name", dto.movies[0].name)
         assertEquals("Overview of movie", dto.movies[0].overview)
         assertEquals(89, dto.movies[0].voteAveragePc)
-        assertTrue(dto.movies[0].posterPath!!.endsWith("posterPath.jpg"))
+        assertTrue(dto.movies[0].largePosterPath!!.endsWith("posterPath.jpg"))
     }
 }

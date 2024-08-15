@@ -9,5 +9,5 @@ data class MovieDto(
     val overview: String,
     val voteAveragePc: Int,
     val smallPosterPath: String?,
-    val posterPath: String?
+    val largePosterPath: String?
 )

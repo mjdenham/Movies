@@ -21,6 +21,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.mjdenham.movies.domain.MovieDto
 import com.mjdenham.movies.ui.CustomNavType
+import com.mjdenham.movies.ui.similar.SimilarScreen
 import com.mjdenham.movies.ui.theme.MoviesTheme
 import com.mjdenham.movies.ui.toprated.TopRatedScreen
 import kotlinx.serialization.Serializable
@@ -65,7 +66,7 @@ class MainActivity : ComponentActivity() {
                         ) { backStackEntry ->
                             val similarMoviesRoute: SimilarMoviesRoute = backStackEntry.toRoute()
                             val movie = similarMoviesRoute.movie
-                            Text(text = "${movie.id} ${movie.name}")
+                            SimilarScreen(movie)
                         }
                     }
                 }
