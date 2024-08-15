@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Top Movies</string>
+    <string name="similar_movies">Similar Movies</string>
     <string name="vote_percent">Score %1$d%%</string>
     <string name="loading_movies">Loading movies</string>
     <string name="done">Done</string>

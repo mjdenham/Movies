@@ -13,6 +13,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.NavHost
@@ -44,9 +48,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
             MoviesTheme {
+                var screenTitleId by remember { mutableStateOf(R.string.app_name) }
+
                 Scaffold(
                     topBar = {
-                        MoviesTopAppBar()
+                        MoviesTopAppBar(screenTitleId)
                     },
                     modifier = Modifier.fillMaxSize()) { innerPadding ->
                     NavHost(
@@ -57,6 +63,7 @@ class MainActivity : ComponentActivity() {
                             .padding(innerPadding)
                     ) {
                         composable<TopRatedRoute> {
+                            screenTitleId = R.string.app_name
                             TopRatedScreen({ selectedMovie ->
                                 navController.navigate(SimilarMoviesRoute(selectedMovie))
                             })
@@ -64,6 +71,7 @@ class MainActivity : ComponentActivity() {
                         composable<SimilarMoviesRoute>(
                             typeMap = mapOf(typeOf<MovieDto>() to CustomNavType.movieDtoType)
                         ) { backStackEntry ->
+                            screenTitleId = R.string.similar_movies
                             val similarMoviesRoute: SimilarMoviesRoute = backStackEntry.toRoute()
                             val movie = similarMoviesRoute.movie
                             SimilarScreen(movie)
@@ -76,14 +84,14 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     @OptIn(ExperimentalMaterial3Api::class)
-    private fun MoviesTopAppBar() {
+    private fun MoviesTopAppBar(screenTitleId: Int) {
         TopAppBar(
             colors = TopAppBarDefaults.topAppBarColors(
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
                 titleContentColor = MaterialTheme.colorScheme.primary,
             ),
             title = {
-                Text(stringResource(id = R.string.app_name))
+                Text(stringResource(id = screenTitleId))
             }
         )
     }
