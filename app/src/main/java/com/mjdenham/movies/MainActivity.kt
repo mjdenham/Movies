@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -69,7 +71,17 @@ class MainActivity : ComponentActivity() {
                             })
                         }
                         composable<SimilarMoviesRoute>(
-                            typeMap = mapOf(typeOf<MovieDto>() to CustomNavType.movieDtoType)
+                            typeMap = mapOf(typeOf<MovieDto>() to CustomNavType.movieDtoType),
+                            enterTransition = {
+                                return@composable slideIntoContainer(
+                                    AnimatedContentTransitionScope.SlideDirection.Start, tween(700)
+                                )
+                            },
+                            popExitTransition = {
+                                return@composable slideOutOfContainer(
+                                    AnimatedContentTransitionScope.SlideDirection.End, tween(700)
+                                )
+                            },
                         ) { backStackEntry ->
                             screenTitleId = R.string.similar_movies
                             val similarMoviesRoute: SimilarMoviesRoute = backStackEntry.toRoute()
