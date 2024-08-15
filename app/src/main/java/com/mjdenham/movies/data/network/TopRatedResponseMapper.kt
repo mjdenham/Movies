@@ -8,11 +8,11 @@ class TopRatedResponseMapper {
     fun mapToTopRatedDto(topRatedResponse: TopRatedResponse): TopRatedSummaryDto =
         TopRatedSummaryDto(
             topRatedResponse.page,
-            topRatedResponse.totalPages,
+            topRatedResponse.totalPages ?: 1,
             topRatedResponse.results.map(::mapToMovieDto)
         )
 
-    private fun mapToMovieDto(movieResult: TopRatedResponse.MovieResult): MovieDto =
+    private fun mapToMovieDto(movieResult: MovieResultItem): MovieDto =
         MovieDto(
             movieResult.id,
             movieResult.name,

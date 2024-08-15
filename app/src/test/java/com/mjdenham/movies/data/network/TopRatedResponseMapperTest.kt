@@ -8,7 +8,7 @@ class TopRatedResponseMapperTest {
 
     private val mapper = TopRatedResponseMapper()
 
-    private val TEST_MOVIE = TopRatedResponse.MovieResult(
+    private val TEST_MOVIE = MovieResultItem(
         adult = false,
         backdropPath = "backdropPath",
         genreIds = emptyList(),
@@ -26,7 +26,7 @@ class TopRatedResponseMapperTest {
     )
 
     @Test
-    fun mapToTopRatedDto() {
+    fun mappingToTopRatedDtoShouldBeValid() {
         val response = TopRatedResponse(5, listOf(TEST_MOVIE), 10, 1)
         val dto = mapper.mapToTopRatedDto(response)
         assertEquals(5, dto.page)

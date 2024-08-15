@@ -64,7 +64,8 @@ class MainActivity : ComponentActivity() {
                             typeMap = mapOf(typeOf<MovieDto>() to CustomNavType.movieDtoType)
                         ) { backStackEntry ->
                             val similarMoviesRoute: SimilarMoviesRoute = backStackEntry.toRoute()
-                            Text(text = similarMoviesRoute.movie.name)
+                            val movie = similarMoviesRoute.movie
+                            Text(text = "${movie.id} ${movie.name}")
                         }
                     }
                 }

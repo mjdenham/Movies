@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class TopRatedResponse(
+data class SimilarResponse(
     val page: Int,
     val results: List<MovieResultItem>,
     @SerialName("total_pages")
