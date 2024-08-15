@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MovieDto(
-    val id: Long,
+    val id: Int,
     val name: String,
     val overview: String,
     val voteAveragePc: Int,

@@ -8,11 +8,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
 
 class TmdbApiClient: MoviesApi {
-    override suspend fun getTopRated(page: Int) = responseMapper.mapToTopRatedDto(
+    override suspend fun getTopRatedMovies(page: Int) = responseMapper.mapToTopRatedDto(
         service.getTopRated(page, TMDB_API_TOKEN)
     )
 
-    suspend fun getSimilar(movieId: Int) = responseMapper.mapToSimilarDto(
+    override suspend fun getSimilarMovies(movieId: Int) = responseMapper.mapToSimilarDto(
         service.getSimilar(movieId, TMDB_API_TOKEN)
     )
 

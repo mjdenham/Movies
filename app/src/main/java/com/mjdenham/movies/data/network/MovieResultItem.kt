@@ -10,7 +10,7 @@ data class MovieResultItem(
     val backdropPath: String?,
     @SerialName("genre_ids")
     val genreIds: List<Long>,
-    val id: Long,
+    val id: Int,
     @SerialName("origin_country")
     val originCountry: List<String>,
     @SerialName("original_language")
