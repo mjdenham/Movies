@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -22,13 +24,11 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.mjdenham.movies.R
 import com.mjdenham.movies.domain.MovieDto
 import com.mjdenham.movies.ui.theme.MoviesTheme
 import org.koin.androidx.compose.koinViewModel
@@ -75,22 +75,29 @@ private fun SimilarMovie(movie: MovieDto, cardWidth: Dp, cardHeight: Dp, modifie
             .padding(15.dp)
     ) {
         Column(
-            verticalArrangement = Arrangement.spacedBy(10.dp),
-            modifier = Modifier.padding(20.dp)
+            modifier = modifier.verticalScroll(rememberScrollState())
         ) {
-            AsyncImage(
-                model = movie.largePosterPath,
-                placeholder = painterResource(R.drawable.ic_launcher_background),
-                contentDescription = "Movie poster",
-                contentScale = ContentScale.FillWidth,
-                modifier = modifier.align(Alignment.CenterHorizontally)
+            movie.largePosterPath?.let {
+                AsyncImage(
+                    model = movie.largePosterPath,
+                    contentDescription = "Movie poster",
+                    contentScale = ContentScale.FillWidth,
+                    modifier = modifier
+                        .align(Alignment.CenterHorizontally)
+                        .fillMaxWidth()
+                )
+            }
+            Text(
+                text = movie.name,
+                style = MaterialTheme.typography.titleMedium,
+                modifier = modifier.padding(20.dp)
             )
-            Text(text = movie.name, style = MaterialTheme.typography.titleMedium)
             Text(
                 text = movie.overview,
                 maxLines = 5,
                 overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.bodyMedium
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = modifier.padding(20.dp, 0.dp)
             )
         }
     }
