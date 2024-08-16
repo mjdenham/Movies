@@ -7,11 +7,11 @@ Some of the technologies used are: Kotlin, Jetpack Compose, Jetpack Navigation, 
 ## Building the Android App
 A recent version of Android Studio is required to build the app.
 
-The app requires an api authorisation key to access The Movie DB api.  This key must be added to local.settings file in the root of the project, as below.
+The app requires an api authorisation key to access The Movie DB api.  This key must be added to apikeys.properties file in the root of the project, as below.
 
 TMDB_API_TOKEN="eyJhbGci..."
 
-In accordance with general standards no api key has been checked into the github repository.  The project will not build until an api key has been added to local.settings.
+In accordance with general standards no api key has been checked into the github repository.  The project will not build until an api key has been added to apikeys.properties.
 
 ## Demo
 

@@ -24,10 +24,10 @@ android {
         }
 
         val properties = Properties()
-        properties.load(project.rootProject.file("local.properties").inputStream())
+        properties.load(project.rootProject.file("apikeys.properties").inputStream())
         val tmdbApiToken = properties.getProperty("TMDB_API_TOKEN")
         if (tmdbApiToken.isNullOrEmpty()) {
-            logger.error("Please register at themoviedb.org and add TMDB_API_TOKEN to local.properties")
+            logger.error("Please register at themoviedb.org and add TMDB_API_TOKEN to an apikeys.properties file in the root of the project")
         }
         buildConfigField("String", "TMDB_API_TOKEN", tmdbApiToken)
     }
