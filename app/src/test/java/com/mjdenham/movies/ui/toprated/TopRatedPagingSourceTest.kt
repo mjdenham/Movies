@@ -11,7 +11,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
-class MoviesPagingSourceTest {
+class TopRatedPagingSourceTest {
 
     private val testMovie = MovieDto(1, "Spiderman", "Brief overview of the movie", 9, "smallPosterPath", "posterPath")
 
@@ -41,11 +41,11 @@ class MoviesPagingSourceTest {
         placeholdersEnabled = false
     )
 
-    private lateinit var pagingSource: MoviesPagingSource
+    private lateinit var pagingSource: TopRatedPagingSource
 
     @Before
     fun setup() {
-        pagingSource = MoviesPagingSource(MoviesUseCase(moviesApiStub))
+        pagingSource = TopRatedPagingSource(MoviesUseCase(moviesApiStub))
     }
 
     @Test

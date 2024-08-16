@@ -6,7 +6,7 @@ import androidx.paging.PagingState
 import com.mjdenham.movies.domain.MovieDto
 import com.mjdenham.movies.domain.MoviesUseCase
 
-class MoviesPagingSource(
+class TopRatedPagingSource(
     private val moviesUseCase: MoviesUseCase
 ): PagingSource<Int, MovieDto>() {
 

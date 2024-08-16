@@ -4,4 +4,5 @@
     <string name="vote_percent">Score %1$d%%</string>
     <string name="loading_movies">Loading movies</string>
     <string name="done">Done</string>
+    <string name="network_error">Error, please check your internet connection.</string>
 </resources>

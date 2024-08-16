@@ -7,10 +7,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -28,6 +26,8 @@ import coil.compose.AsyncImage
 import com.mjdenham.movies.R
 import com.mjdenham.movies.domain.MovieDto
 import com.mjdenham.movies.ui.theme.MoviesTheme
+import com.mjdenham.movies.ui.util.LoadingIndicator
+import com.mjdenham.movies.ui.util.NetworkErrorMessage
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -37,12 +37,7 @@ fun TopRatedScreen(onMovieSelected: (movie: MovieDto) -> Unit, modifier: Modifie
     LazyColumn {
         if (lazyPagingMovies.loadState.refresh == LoadState.Loading) {
             item {
-                Text(
-                    text = stringResource(R.string.loading_movies),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentWidth(Alignment.CenterHorizontally)
-                )
+                LoadingIndicator()
             }
         }
 
@@ -59,13 +54,13 @@ fun TopRatedScreen(onMovieSelected: (movie: MovieDto) -> Unit, modifier: Modifie
 
         if (lazyPagingMovies.loadState.append == LoadState.Loading) {
             item {
-                CircularProgressIndicator(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentWidth(Alignment.CenterHorizontally)
-                )
+                LoadingIndicator()
             }
         }
+    }
+
+    if (lazyPagingMovies.loadState.hasError) {
+        NetworkErrorMessage()
     }
 }
 
@@ -91,7 +86,6 @@ private fun TopRatedMovie(movie: MovieDto, modifier: Modifier) {
     }
     HorizontalDivider()
 }
-
 
 @Preview(showBackground = true)
 @Composable

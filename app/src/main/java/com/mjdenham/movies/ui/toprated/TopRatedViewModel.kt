@@ -9,7 +9,7 @@ import androidx.paging.cachedIn
 import com.mjdenham.movies.domain.MovieDto
 import kotlinx.coroutines.flow.Flow
 
-class TopRatedViewModel(val moviesPagingSource: MoviesPagingSource): ViewModel() {
+class TopRatedViewModel(val topRatedPagingSource: TopRatedPagingSource): ViewModel() {
 
     private val pagingDataFlow = getMoviesPager().cachedIn(viewModelScope)
 
@@ -20,7 +20,7 @@ class TopRatedViewModel(val moviesPagingSource: MoviesPagingSource): ViewModel()
             pageSize = 20,
         ),
         pagingSourceFactory = {
-            moviesPagingSource
+            topRatedPagingSource
         }
     ).flow
 }

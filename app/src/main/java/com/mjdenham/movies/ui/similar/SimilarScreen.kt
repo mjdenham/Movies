@@ -1,6 +1,5 @@
 package com.mjdenham.movies.ui.similar
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,7 +16,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -28,9 +26,12 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.mjdenham.movies.domain.MovieDto
 import com.mjdenham.movies.ui.theme.MoviesTheme
+import com.mjdenham.movies.ui.util.LoadingIndicator
+import com.mjdenham.movies.ui.util.NetworkErrorMessage
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -40,12 +41,20 @@ fun SimilarScreen(movie: MovieDto, modifier: Modifier = Modifier, viewModel: Sim
         viewModel.loadSimilarMovies(movie)
     }
 
-    val movies by viewModel.similarState.collectAsState()
-    Column(
-        modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceBetween
-    ) {
-        SimilarMovies(movies = movies, modifier = modifier)
+    val similarResponse by viewModel.similarState.collectAsStateWithLifecycle()
+    similarResponse.let { response ->
+        when (response) {
+            is SimilarResponse.Success -> {
+                val movies = response.data
+                SimilarMovies(movies = movies, modifier = modifier)
+            }
+            is SimilarResponse.Loading -> {
+                LoadingIndicator()
+            }
+            is SimilarResponse.Error -> {
+                NetworkErrorMessage()
+            }
+        }
     }
 }
 
