@@ -3,7 +3,7 @@ package com.mjdenham.movies.domain
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MovieDto(
+data class Movie(
     val id: Int,
     val name: String,
     val overview: String,

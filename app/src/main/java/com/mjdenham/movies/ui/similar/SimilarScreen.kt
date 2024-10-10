@@ -28,14 +28,14 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
-import com.mjdenham.movies.domain.MovieDto
+import com.mjdenham.movies.domain.Movie
 import com.mjdenham.movies.ui.theme.MoviesTheme
 import com.mjdenham.movies.ui.util.LoadingIndicator
 import com.mjdenham.movies.ui.util.NetworkErrorMessage
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun SimilarScreen(movie: MovieDto, modifier: Modifier = Modifier, viewModel: SimilarViewModel = koinViewModel()) {
+fun SimilarScreen(movie: Movie, modifier: Modifier = Modifier, viewModel: SimilarViewModel = koinViewModel()) {
     val savedMovieId by rememberSaveable { mutableStateOf(movie.id) }
     LaunchedEffect(savedMovieId) {
         viewModel.loadSimilarMovies(movie)
@@ -59,7 +59,7 @@ fun SimilarScreen(movie: MovieDto, modifier: Modifier = Modifier, viewModel: Sim
 }
 
 @Composable
-private fun SimilarMovies(movies: List<MovieDto>, modifier: Modifier) {
+private fun SimilarMovies(movies: List<Movie>, modifier: Modifier) {
     BoxWithConstraints(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -76,7 +76,7 @@ private fun SimilarMovies(movies: List<MovieDto>, modifier: Modifier) {
     }
 }
 @Composable
-private fun SimilarMovie(movie: MovieDto, cardWidth: Dp, cardHeight: Dp, modifier: Modifier) {
+private fun SimilarMovie(movie: Movie, cardWidth: Dp, cardHeight: Dp, modifier: Modifier) {
     Card(
         modifier = modifier
             .width(cardWidth)
@@ -117,7 +117,7 @@ private fun SimilarMovie(movie: MovieDto, cardWidth: Dp, cardHeight: Dp, modifie
 fun SimilarMoviePreview() {
     MoviesTheme {
         SimilarMovie(
-            MovieDto(
+            Movie(
                 1,
                 "The Hulk",
                 LONG_OVERVIEW,
@@ -136,7 +136,7 @@ fun SimilarMoviesPreview() {
     MoviesTheme {
         SimilarMovies(
             listOf(
-                MovieDto(
+                Movie(
                     1,
                     "The Hulk",
                     LONG_OVERVIEW,
@@ -144,7 +144,7 @@ fun SimilarMoviesPreview() {
                     "https://image.tmdb.org/t/p/w92/gpkM8VeiYyQuEg9qkAoNplktwe4.jpg",
                     "https://image.tmdb.org/t/p/original/gpkM8VeiYyQuEg9qkAoNplktwe4.jpg"
                 ),
-                MovieDto(
+                Movie(
                     1,
                     "Mr Bean's Holiday",
                     "Overview of Mr Bean's Holiday",
@@ -152,7 +152,7 @@ fun SimilarMoviesPreview() {
                     "https://image.tmdb.org/t/p/w92/gpkM8VeiYyQuEg9qkAoNplktwe4.jpg",
                     "https://image.tmdb.org/t/p/original/gpkM8VeiYyQuEg9qkAoNplktwe4.jpg"
                 ),
-                MovieDto(
+                Movie(
                     1,
                     "The Invisible Man",
                     "Overview of The Invisible Man",

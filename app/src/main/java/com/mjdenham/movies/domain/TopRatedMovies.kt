@@ -1,7 +1,7 @@
 package com.mjdenham.movies.domain
 
-data class TopRatedMoviesDto(
+data class TopRatedMovies(
     val page: Int,
     val totalPages: Int,
-    val movies: List<MovieDto>
+    val movies: List<Movie>
 )

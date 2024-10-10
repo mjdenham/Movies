@@ -1,25 +1,25 @@
 package com.mjdenham.movies.data.network
 
-import com.mjdenham.movies.domain.MovieDto
-import com.mjdenham.movies.domain.SimilarMoviesDto
-import com.mjdenham.movies.domain.TopRatedMoviesDto
+import com.mjdenham.movies.domain.Movie
+import com.mjdenham.movies.domain.SimilarMovies
+import com.mjdenham.movies.domain.TopRatedMovies
 import kotlin.math.roundToInt
 
 class ResponseMapper {
-    fun mapToTopRatedDto(topRatedResponse: TopRatedResponse): TopRatedMoviesDto =
-        TopRatedMoviesDto(
+    fun mapToTopRatedDto(topRatedResponse: TopRatedResponse): TopRatedMovies =
+        TopRatedMovies(
             topRatedResponse.page,
             topRatedResponse.totalPages ?: 1,
             topRatedResponse.results.map(::mapToMovieDto)
         )
 
-    fun mapToSimilarDto(similarResponse: SimilarResponse): SimilarMoviesDto =
-        SimilarMoviesDto(
+    fun mapToSimilarDto(similarResponse: SimilarResponse): SimilarMovies =
+        SimilarMovies(
             similarResponse.results.map(::mapToMovieDto)
         )
 
-    private fun mapToMovieDto(movieResult: MovieResultItem): MovieDto =
-        MovieDto(
+    private fun mapToMovieDto(movieResult: MovieResultItem): Movie =
+        Movie(
             movieResult.id,
             movieResult.name,
             movieResult.overview,

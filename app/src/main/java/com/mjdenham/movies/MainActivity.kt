@@ -25,7 +25,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.mjdenham.movies.domain.MovieDto
+import com.mjdenham.movies.domain.Movie
 import com.mjdenham.movies.ui.CustomNavType
 import com.mjdenham.movies.ui.similar.SimilarScreen
 import com.mjdenham.movies.ui.theme.MoviesTheme
@@ -40,7 +40,7 @@ import kotlin.reflect.typeOf
 object TopRatedRoute
 
 @Serializable
-data class SimilarMoviesRoute(val movie: MovieDto)
+data class SimilarMoviesRoute(val movie: Movie)
 
 class MainActivity : ComponentActivity() {
 
@@ -71,7 +71,7 @@ class MainActivity : ComponentActivity() {
                             })
                         }
                         composable<SimilarMoviesRoute>(
-                            typeMap = mapOf(typeOf<MovieDto>() to CustomNavType.movieDtoType),
+                            typeMap = mapOf(typeOf<Movie>() to CustomNavType.movieType),
                             enterTransition = {
                                 return@composable slideIntoContainer(
                                     AnimatedContentTransitionScope.SlideDirection.Start, tween(700)

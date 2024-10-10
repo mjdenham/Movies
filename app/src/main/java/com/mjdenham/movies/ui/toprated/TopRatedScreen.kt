@@ -24,14 +24,14 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import com.mjdenham.movies.R
-import com.mjdenham.movies.domain.MovieDto
+import com.mjdenham.movies.domain.Movie
 import com.mjdenham.movies.ui.theme.MoviesTheme
 import com.mjdenham.movies.ui.util.LoadingIndicator
 import com.mjdenham.movies.ui.util.NetworkErrorMessage
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun TopRatedScreen(onMovieSelected: (movie: MovieDto) -> Unit, modifier: Modifier = Modifier, viewModel: TopRatedViewModel = koinViewModel()) {
+fun TopRatedScreen(onMovieSelected: (movie: Movie) -> Unit, modifier: Modifier = Modifier, viewModel: TopRatedViewModel = koinViewModel()) {
     val lazyPagingMovies = viewModel.getPagedMovies().collectAsLazyPagingItems()
 
     LazyColumn {
@@ -65,7 +65,7 @@ fun TopRatedScreen(onMovieSelected: (movie: MovieDto) -> Unit, modifier: Modifie
 }
 
 @Composable
-private fun TopRatedMovie(movie: MovieDto, modifier: Modifier) {
+private fun TopRatedMovie(movie: Movie, modifier: Modifier) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier.fillMaxWidth()
@@ -90,7 +90,7 @@ private fun TopRatedMovie(movie: MovieDto, modifier: Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun TopRatedPreview() {
-    val testMovie = MovieDto(
+    val testMovie = Movie(
         1,
         "The Hulk",
         "Brief overview of the film",
